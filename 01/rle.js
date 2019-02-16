@@ -14,10 +14,9 @@
  * @return {string}
  */
 export function rle(input) {
-  const obj = input.split('').reduce((a, b) => {
-    a[b] = (a[b] || 0) + 1;
-    return a;
-  }, {});
+  const sameChars = input.match(/([A-Z])\1*/g);
 
-  return Object.entries(obj).reduce((result, a) => result + a[0] + (a[1] === 1 ? '' : a[1]), '');
+  const result = sameChars.reduce((str, chars) => str + chars.charAt(0) + (chars.length > 1 ? chars.length : ''), '');
+
+  return result;
 }
