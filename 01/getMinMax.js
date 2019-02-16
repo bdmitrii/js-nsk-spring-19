@@ -17,5 +17,25 @@
  * @return {{min: number, max: number}} объект с минимумом и максимумом
  */
 export function getMinMax(input) {
+  const numbers =
+    input
+      .match(/-?(\d\.?\d*)|(Infinity)/g)
+      .map(n => {
+        switch (n) {
+          case 'Infinity':
+            return Infinity;
+          case '-Infinity':
+            return -Infinity;
+          default:
+            return +n;
+        }
+      });
 
+  const min = Math.min(...numbers);
+  const max = Math.max(...numbers);
+
+  return {
+    min,
+    max
+  };
 }
