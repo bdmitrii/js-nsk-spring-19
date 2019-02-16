@@ -14,5 +14,10 @@
  * @return {string}
  */
 export function rle(input) {
+  const obj = input.split('').reduce((a, b) => {
+    a[b] = (a[b] || 0) + 1;
+    return a;
+  }, {});
 
+  return Object.entries(obj).reduce((result, a) => result + a[0] + (a[1] === 1 ? '' : a[1]), '');
 }
