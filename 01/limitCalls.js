@@ -20,5 +20,14 @@
  * @return {Function}
  */
 export function limitCalls(fn, maxCalls) {
+  let a = 0;
 
+  return () => {
+    if (a === maxCalls) {
+      return;
+    }
+
+    fn();
+    a += 1;
+  };
 }
