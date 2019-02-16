@@ -20,5 +20,5 @@
  * @return {boolean}
  */
 export function passwordCheck(password) {
-
+  return /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!?.,+\-=*/]).{10,}/.test(password);
 }
