@@ -41,7 +41,7 @@
       "no-unused-vars": [2, {"vars": "all", "args": "none", "ignoreRestSiblings": true}],
       "no-cond-assign": [1, "always"],
       "default-case": 1,
-      "no-use-before-define": 1,
+      "no-use-before-define": 0,
       "one-var-declaration-per-line": 1,
       "no-confusing-arrow": 1,
       "arrow-body-style": 1,
@@ -202,4 +202,3 @@
       "tinkoff/ui-npm-only": 0
     }
   }
-  
