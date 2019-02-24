@@ -14,5 +14,9 @@
  * @return {string}
  */
 export function rle(input) {
+  const sameChars = input.match(/([A-Z])\1*/g);
 
+  const result = sameChars.reduce((str, chars) => str + chars.charAt(0) + (chars.length > 1 ? chars.length : ''), '');
+
+  return result;
 }

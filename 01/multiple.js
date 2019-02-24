@@ -14,5 +14,14 @@
  * @return {number}
  */
 export function multiple(a, b) {
+  const sign = (a > 0 && b > 0) || (a < 0 && b < 0) ? 1 : -1;
+  const newB = Math.abs(b);
 
+  let result = 0;
+
+  for (let newA = Math.abs(a); newA; newA--) {
+    result += newB;
+  }
+
+  return sign < 0 ? (-result || 0) : result;
 }
