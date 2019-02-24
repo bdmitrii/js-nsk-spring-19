@@ -1,1 +1,1 @@
-const btn = document.getElement
+const btn = document.getElement;
