@@ -12,4 +12,17 @@
  * @returns а это уже сами решите
  */
 export function sum(x) {
+  if (x === undefined) {
+    return 0;
+  }
+
+  let res = x;
+
+  return function f(y) {
+    if (y === undefined) {
+      return res;
+    }
+    res += y;
+    return f;
+  };
 }
