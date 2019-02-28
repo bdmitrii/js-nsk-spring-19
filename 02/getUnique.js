@@ -13,11 +13,11 @@
  */
 export function getUnique(input) {
   return input
-    .sort((a, b) => a - b)
     .reduce((arr, v) => {
       if (!arr.includes(v)) {
         arr.push(v);
       }
       return arr;
-    }, []);
+    }, [])
+    .sort((a, b) => a - b);
 }
