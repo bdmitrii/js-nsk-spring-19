@@ -23,5 +23,5 @@ export function multiple(a, b) {
     result += newB;
   }
 
-  return sign < 0 ? (-result || 0) : result;
+  return sign < 0 ? -result : result;
 }
