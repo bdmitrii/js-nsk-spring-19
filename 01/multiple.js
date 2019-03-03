@@ -14,7 +14,11 @@
  * @return {number}
  */
 export function multiple(a, b) {
-  const sign = (a > 0 && b > 0) || (a < 0 && b < 0) ? 1 : -1;
+  const isNegative = x => x < 0 || Object.is(x, -0);
+  const isPositive = x => x > 0 || Object.is(x, 0);
+
+  const sign = (isPositive(a) && isPositive(b)) || (isNegative(a) && isNegative(b)) ? 1 : -1;
+
   const newB = Math.abs(b);
 
   let result = 0;
@@ -23,5 +27,5 @@ export function multiple(a, b) {
     result += newB;
   }
 
-  return sign < 0 ? (-result || 0) : result;
+  return sign < 0 ? -result : result;
 }
