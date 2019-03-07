@@ -12,4 +12,12 @@
  * @return {Set<any>} массив уникальных значений, отсортированный по возрастанию
  */
 export function getUnique(input) {
+  return input
+    .reduce((arr, v) => {
+      if (!arr.includes(v)) {
+        arr.push(v);
+      }
+      return arr;
+    }, [])
+    .sort((a, b) => a - b);
 }

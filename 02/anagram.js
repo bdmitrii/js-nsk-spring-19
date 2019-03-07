@@ -12,4 +12,14 @@
  * @return {boolean}
  */
 export function anagram(first, second) {
+  const sortStr = s => s
+    .toLowerCase()
+    .split('')
+    .sort()
+    .join('');
+
+  const sortedFirst = sortStr(first);
+  const sortedSecond = sortStr(second);
+
+  return sortedFirst === sortedSecond;
 }
