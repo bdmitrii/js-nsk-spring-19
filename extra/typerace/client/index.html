@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="header">
+        <ul class="header__nav  container">
+          <li class="header__nav-item">
+            <a href="." class="logo header__logo header__nav-link">TypeRace</a>
+          </li>
+        </ul>
+      </header>
+
+      <div class="game container">
+        <div class="game__info">
+          <div class="game__info-mes"></div>
+          <div class="game__info-speed"></div>
+          <div class="game__info-time"></div>
+        </div>
+        <p class="game__text">
+          <span class="correct-text game__text-part "></span>
+          <span class="current-word game__text-part "></span>
+          <span class="remaining-text game__text-part"></span>
+        </p>
+        <div class="game__controls">
+          <input type="text" class="input user-input" />
+          <a class="btn game__controls-start">
+            <span class="btn__wrap">
+              <span class="btn__content">Начать игру</span>
+            </span>
+          </a>
+          <a class="btn btn-pause btn_disabled game__controls-pause">
+            <span class="btn__wrap">
+              <span class="btn__content">||</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
