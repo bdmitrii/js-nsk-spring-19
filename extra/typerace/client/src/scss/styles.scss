@@ -1,0 +1,295 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+}
+
+body {
+  font-family: Helvetica, sans-serif;
+  height: 100%;
+}
+
+.wrap {
+  display: flex;
+  flex-flow: column;
+  height: 100%;
+}
+
+.heading {
+  margin: 0;
+  color: #333;
+}
+
+.heading_size_xlg {
+  font-size: 48px;
+  line-height: 60px;
+  font-weight: 400;
+}
+
+.heading_size_lg {
+  font-size: 36px;
+  line-height: 46px;
+  font-weight: 400;
+}
+
+.heading_size_md-2 {
+  font-size: 24px;
+  line-height: 30px;
+  font-weight: 400;
+}
+
+.heading_size_md {
+  font-size: 18px;
+  line-height: 26px;
+  font-weight: 400;
+}
+
+.heading_size_sm {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 400;
+}
+
+.text-error {
+  color: #e30000;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.link {
+  text-decoration: none;
+  color: #333;
+}
+
+.form {
+  width: 370px;
+
+  &__item:not(:last-child) {
+    margin-bottom: 16px;
+  }
+
+  &_align_center {
+    margin: 0 auto;
+  }
+
+  &__btn-switch {
+    margin-left: 10px;
+  }
+}
+
+.label {
+  font-size: 18px;
+  line-height: 26px;
+}
+
+.input-wrap {
+  position: relative;
+  display: flex;
+  flex-flow: column nowrap;
+
+  &__label {
+    margin-bottom: 5px;
+  }
+}
+
+.input {
+  display: inline-flex;
+  height: 44px;
+  font-size: 18px;
+  box-sizing: border-box;
+  background-color: #eef2f7;
+  border: 1px solid #eef2f7;
+  border-radius: 4px;
+  padding: 10px 15px;
+  outline: none;
+
+  &:focus {
+    border: 1px solid #e6e6e6;
+    background-color: #fff;
+  }
+
+  &_type_error:focus {
+    background-color: #f60000;
+  }
+
+  &_size_m {
+    width: 420px;
+  }
+}
+
+.btn {
+  display: inline-flex;
+  background-color: #ffdd2d;
+  color: #333;
+  height: 42px;
+  border-radius: 4px;
+  font-size: 15px;
+  line-height: 24px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+
+  &__content-wrap {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 42px;
+    padding: 9px 23px 7px;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: default;
+  }
+
+  &-pause {
+    font-size: 20px;
+    font-weight: 700;
+  }
+
+  &_size_m {
+    width: 140px;
+  }
+
+  &_size_s {
+    width: 80px;
+  }
+}
+
+.container {
+  box-sizing: border-box;
+  padding: 0 20px;
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  min-width: 1200px;
+  background-color: #f5f5f6;
+  box-shadow: 0 10px 16px -6px rgba(0, 0, 0, 0.08);
+
+  &__nav {
+    display: flex;
+    flex-direction: row;
+
+    &-list {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-end;
+      list-style-type: none;
+      margin-left: auto;
+    }
+
+    &-item:not(:last-child) {
+      margin-right: 20px;
+    }
+
+    &-link {
+      font-size: 16px;
+      display: inline-block;
+      color: #333;
+      text-decoration: none;
+      padding: 10px 0;
+    }
+  }
+}
+
+.logo {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.current-word {
+  background-color: rgb(255, 255, 145);
+}
+
+.correct-text {
+  color: #aaa;
+}
+
+.game {
+  width: 900px;
+  margin-top: 80px;
+
+  &__text {
+    margin-top: 15px;
+    border: 1px solid #e6e6e6;
+    border-radius: 4px;
+    font-size: 0;
+    font-family: Helvetica, sans-serif;
+    padding: 10px 15px;
+    min-height: 250px;
+    letter-spacing: 0.1px;
+
+    &-part {
+      font-size: 21px;
+      line-height: 24px;
+      letter-spacing: 0.1px;
+    }
+  }
+
+  &__info {
+    display: flex;
+    height: 40px;
+    align-items: flex-end;
+
+    &-speed,
+    &-time,
+    &-mes {
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    &-speed {
+      margin-left: auto;
+    }
+
+    &-time {
+      margin-left: 25px;
+    }
+
+    &-mes {
+      font-size: 22px;
+    }
+  }
+
+  &__controls {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+
+    &-start {
+      margin-left: 20px;
+    }
+
+    &-pause {
+      margin-left: 10px;
+    }
+  }
+}
+
+.login-form {
+  margin-top: 60px;
+}
+
+.pulse-animation {
+  animation: pulse 0.5s infinite alternate;
+}
+
+@keyframes pulse {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(1.5);
+  }
+}
