@@ -14,7 +14,7 @@
     "ava": "ava tests/test-*.js",
     "build": "webpack --mode=production",
     "server": "nodemon ./extra/typerace/app.js",
-    "start": "npm-run-all -p build server"
+    "start": "npm-run-all build server"
   },
   "repository": {
     "type": "git",
