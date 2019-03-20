@@ -1,0 +1,24 @@
+{{> header}}
+
+<div class="rating-table table-wrap">
+  <div class="table">
+    <div class="table__row table__row-header">
+      <div class="table__cell table__header-cell">
+        Имя
+      </div>
+      <div class="table__cell table__header-cell">
+        Лучший результат
+      </div>
+    </div>
+    {{#profileInfo}}
+    <div class="table__row">
+      <div class="table__cell">
+        {{ name }}
+      </div>
+      <div class="table__cell">{{ bestResult }} c/м</div>
+    </div>
+    {{/profileInfo}}
+  </div>
+</div>
+
+{{> footer}}

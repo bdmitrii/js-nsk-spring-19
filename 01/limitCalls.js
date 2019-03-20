@@ -7,7 +7,7 @@
  * аргументами можно не учитывать.
  *
  * Пример:
- * const limitedLog = limitCalls(() => console.log('log'), 2);
+ * const limitedLog = limitCalls(() => ('log'), 2);
  * limitedLog(); // 'log'
  * limitedLog(); // 'log'
  * limitedLog(); // undefined

@@ -1,0 +1,38 @@
+{{> header}}
+
+<form class="form form_align_center login-form" method="post">
+  <h3 class="page-title heading heading_size_lg text-center">Вход</h3>
+  <div class="input-wrap form__item">
+    <label class="label input-wrap__label" for="login">Логин</label>
+    <input
+      type="text"
+      class="input input_size_md"
+      id="login"
+      name="login"
+      value="{{ login }}"
+    />
+  </div>
+
+  <div class="input-wrap form__item">
+    <label class="label input-wrap__label" for="password">Пароль</label>
+    <input
+      type="password"
+      class="input input_size_md"
+      id="password"
+      name="password"
+    />
+  </div>
+
+  {{#isLoginError}}
+  <p class="form__item headgin heading_size_sm text-error">
+    Неверные логин или пароль
+  </p>
+  {{/isLoginError}}
+  <button id="submit-btn" class="btn btn_size_m">
+    <span class="btn__content-wrap">
+      <span class="btn__content">Войти</span>
+    </span>
+  </button>
+  <a class="link form__btn-switch" href="/registration">или зарегистрироваться</a>
+</form>
+{{> footer}}

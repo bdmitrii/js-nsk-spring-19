@@ -37,3 +37,5 @@ jspm_packages/
 
 # IDEA
 .idea
+
+/extra/typerace/client/dist

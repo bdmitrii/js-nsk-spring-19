@@ -13,4 +13,19 @@
  * @return {number[]} массив значений, отсортированный по возрастанию
  */
 export function getIntersection(first, second) {
+  const getObject = arr => arr.reduce((obj, key) => {
+    obj[key] = (obj[key] || 0) + 1;
+    return obj;
+  }, {});
+
+  const firstObj = getObject(first);
+  const secondObj = getObject(second);
+
+  return Object.keys(firstObj)
+    .reduce((acc, key) => {
+      const hasOwnProperty = Object.prototype.hasOwnProperty.call(secondObj, key);
+
+      return hasOwnProperty ? [...acc, ...Array(Math.min(firstObj[key], secondObj[key])).fill(+key)] : acc;
+    }, [])
+    .sort((a, b) => a - b);
 }

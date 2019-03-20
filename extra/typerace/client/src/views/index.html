@@ -1,0 +1,28 @@
+{{> header}}
+      <div class="game container">
+        <div class="game__info">
+          <div class="game__info-mes"></div>
+          <div class="game__info-speed"></div>
+          <div class="game__info-time"></div>
+        </div>
+        <p class="game__text">
+          <span class="correct-text game__text-part "></span>
+          <span class="current-word game__text-part "></span>
+          <span class="remaining-text game__text-part"></span>
+        </p>
+        <div class="game__controls">
+          <input type="text" disabled class="input user-input" />
+          <a class="btn game__controls-start btn_size_m">
+            <span class="btn__content-wrap">
+              <span class="btn__content">Начать игру</span>
+            </span>
+          </a>
+          <button disabled class="btn btn-pause btn_size_s game__controls-pause">
+            <span class="btn__content-wrap">
+              <span class="btn__content">||</span>
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+{{> footer}}
