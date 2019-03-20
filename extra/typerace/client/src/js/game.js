@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import { getRandomText, timer, typedTextLen } from './utils';
 import createStore from './store';
 import { TIME_TO_LEN_RATION, SPEED_UPDATE_GAP, TICKS_TO_START } from './constants';
@@ -35,7 +37,9 @@ function initState() {
 }
 
 async function initGame() {
-  const { text } = await getRandomText({ type: 'sentance' });
+  let { text } = await getRandomText({ type: 'sentance' });
+
+  text = text.slice(0, 80).trim();
 
   const timeLeft = Math.round(text.length * TIME_TO_LEN_RATION);
   const words = text.split(' ');
@@ -111,6 +115,22 @@ function initUI() {
 async function onStart() {
   await initGame();
   startBtnElem.querySelector('.btn__content').innerText = 'Играть заного';
+
+  const unsubscribe = store.subscribe(() => {
+    const { isGameEnded } = store.getState();
+
+    if (!isGameEnded) {
+      return;
+    }
+
+    const { userSpeed } = store.getState();
+
+    axios.patch('/api/stat', {
+      newSpeed: userSpeed
+    });
+
+    unsubscribe();
+  });
 }
 
 function updateSpeed({ tickCount, period }) {

@@ -3,17 +3,13 @@ const koaLogger = require('koa-logger');
 const koaViews = require('koa-views');
 const koaStatic = require('koa-static');
 const koaBody = require('koa-body');
-const { devMiddleware, hotMiddleware } = require('koa-webpack-middleware');
 
 const passport = require('koa-passport');
-const { JwtStratagy, ExtractJwt } = require('passport-jwt');
 
-const jwt = require('jsonwebtoken');
+const { Strategy } = require('passport-jwt');
 
-const webpack = require('webpack');
 const path = require('path');
 const jwtSecret = require('./server/keys');
-const config = require('../../webpack.config');
 
 const apiRoutes = require('./server/apiRoutes');
 const viewsRoutes = require('./server/viewsRoutes');
@@ -28,19 +24,34 @@ const views = koaViews(path.join(__dirname, '/client/dist/views'), {
   }
 });
 
+const cookieExtractor = req => {
+  let token = null;
+
+  if (req && req.cookies) {
+    token = req.cookies.get('token');
+  }
+
+  return token;
+};
+
+const opts = {
+  jwtFromRequest: cookieExtractor,
+  secretOrKey: jwtSecret
+};
+
 const app = new koa();
 
-const compile = webpack(config);
-
 app.use(koaLogger());
-app.use(koaStatic('/'));
-app.use(devMiddleware(compile), {
-  publicPath: '/'
-});
-app.use(hotMiddleware(compile));
+app.use(koaStatic('./extra/typerace/client/dist'));
 app.use(views);
 app.use(koaBody());
+
+app.use(passport.initialize());
+
+passport.use(new Strategy(opts, (jwtPayload, done) => done(null, jwtPayload)));
+// require('./server/passport')(passport);
+
 app.use(apiRoutes);
 app.use(viewsRoutes);
 
-app.listen(3000, () => console.log(path.resolve(__dirname)));
+app.listen(4000, () => 'СЛУШАЕМ ПОРТ 4000');

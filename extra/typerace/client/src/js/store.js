@@ -1,7 +1,7 @@
 function createStore() {
   let state = {};
 
-  const listeners = [];
+  let listeners = [];
 
   const setState = newState => {
     state = {
@@ -18,14 +18,19 @@ function createStore() {
     listeners.push(listener);
 
     return () => {
-      listeners.filter(l => l !== listener);
+      listeners = listeners.filter(l => l !== listener);
     };
+  };
+
+  const clearListeners = () => {
+    listeners = [];
   };
 
   return {
     setState,
     getState,
-    subscribe
+    subscribe,
+    clearListeners
   };
 }
 

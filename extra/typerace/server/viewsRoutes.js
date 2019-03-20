@@ -1,51 +1,79 @@
 const koaRouter = require('koa-router');
 
+const passport = require('koa-passport');
+const jwt = require('jsonwebtoken');
 const User = require('./models/user');
-const { validateRegistration } = require('./validation');
+const Stat = require('./models/stat');
 
 const router = new koaRouter();
 
 const jwtSecret = require('./keys');
 
-const passport = require('koa-passport');
-const { JwtStratagy, ExtractJwt } = require('passport-jwt');
-
-const jwt = require('jsonwebtoken');
-
 router
-  .get('/', mainPage)
+  .get('/', passport.authenticate('jwt', { session: false, failureRedirect: '/login' }), indexPage)
   .get('/login', loginPage)
+  .post('/login', loginPage)
   .get('/registration', registrationPage)
-  .post('/registration', registrationPage);
+  .get('/logout', async ctx => {
+    ctx.cookies.set('token');
+    await loginPage(ctx);
+  })
+  .get('/profile', profilePage)
+  .get('/rating', ratingPage);
 
-async function mainPage(ctx) {
-  await ctx.render('index', {
-    title: 'TypeRace'
-  });
+async function ratingPage(ctx) {
+  const isLogin = Boolean(ctx.cookies.get('token'));
+
+  const top10 = await Stat.getLast(10);
+
+  const ratingList = await Promise.all(
+    top10.map(async(rec, index) => {
+      const { userId } = rec;
+      const user = await User.get(null, null, userId);
+
+      const { login: name } = user;
+      const { speed } = rec;
+
+      return { index: index + 1, name, speed };
+    })
+  ).then(list => list);
+
+  await ctx.render('rating', { isLogin, ratingList });
+}
+
+async function profilePage(ctx) {
+  const isLogin = Boolean(ctx.cookies.get('token'));
+
+  const token = ctx.cookies.get('token');
+
+  const { userId, login: name } = jwt.decode(token);
+  const { speed: bestResult } = (await Stat.getBestByUser(userId))[0];
+
+  await ctx.render('profile', { isLogin, profileInfo: { bestResult, name } });
 }
 
 async function loginPage(ctx) {
-  await ctx.render('login', {});
+  const { login, password } = ctx.request.body;
+
+  if (ctx.method === 'POST') {
+    const { _id: userId } = await User.get(login, password);
+
+    if (userId) {
+      jwt.sign({ userId, login, password }, jwtSecret, { expiresIn: 3600 }, (err, token) => {
+        ctx.cookies.set('token', `${token}`);
+      });
+    }
+  }
+  await ctx.render('login');
+}
+
+async function indexPage(ctx) {
+  const isLogin = Boolean(ctx.cookies.get('token'));
+
+  await ctx.render('index', { isLogin });
 }
 
 async function registrationPage(ctx) {
-  const { login, password, password2 } = ctx.request.body;
-
-  let error;
-
-  if (ctx.method === 'POST') {
-    error = validateRegistration(login, password, password2);
-
-    if (!error) {
-      const id = await User.create(login, password);
-
-      console.log(id);
-      jwt.sign({ id, login, password }, jwtSecret, { expiresIn: 3600 }, (err, token) => {});
-
-      ctx.redirect('/');
-    }
-  }
-
   await ctx.render('registration');
 }
 

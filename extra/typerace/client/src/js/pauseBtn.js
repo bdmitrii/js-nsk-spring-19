@@ -46,7 +46,7 @@ function render() {
   const { isGameStarted } = store.getState();
 
   if (isGameStarted) {
-    // console.log(isGameStarted);
+    // (isGameStarted);
     enable();
   } else {
     disable();

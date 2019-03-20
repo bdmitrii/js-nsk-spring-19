@@ -14,9 +14,19 @@
             <li class="header__nav-item">
               <a href="/rating" class="header__nav-link">Рекорды</a>
             </li>
+            {{^isLogin}}
             <li class="header__nav-item">
               <a href="/login" class="header__nav-link">Войти</a>
             </li>
+            {{/isLogin}}
+            {{#isLogin}}
+            <li class="header__nav-item">
+              <a href="/profile" class="header__nav-link">Личный кабинет</a>
+            </li>
+            <li class="header__nav-item">
+              <a href="/logout" class="header__nav-link">Выйти</a>
+            </li>
+            {{/isLogin}}
           </ul>
         </nav>
       </header>

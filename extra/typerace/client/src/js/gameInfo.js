@@ -9,7 +9,7 @@ function render() {
     isGameEnded, isCountDownStarted, timeToStart, userSpeed, timeLeft, isSuccess
   } = store.getState();
 
-  // console.log(store.getState());
+  // (store.getState());
 
   if (isCountDownStarted) {
     messageElem.innerText = `Игра начнётся через ${timeToStart}`;

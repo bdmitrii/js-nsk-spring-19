@@ -14,14 +14,14 @@ module.exports = {
   },
   output: {
     filename: 'bundle.[name].js',
-    path: path.resolve(typeracePath, 'dist')
+    path: path.resolve(typeracePath, 'dist'),
+    publicPath: '/'
   },
   devServer: {
     contentBase: path.resolve(typeracePath, 'dist'),
     port: 9000
   },
   mode: 'production',
-  watch: true,
   // devtool: 'source-map',
   module: {
     rules: [
@@ -65,6 +65,16 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(viewsPath, 'footer.html'),
       filename: 'views/footer.html',
+      inject: false
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(viewsPath, 'rating.html'),
+      filename: 'views/rating.html',
+      inject: false
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(viewsPath, 'profile.html'),
+      filename: 'views/profile.html',
       inject: false
     }),
     new HtmlWebpackPlugin({
