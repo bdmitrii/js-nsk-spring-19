@@ -18,15 +18,21 @@ class User {
     });
   }
 
-  static async getUser(login, password) {
+  static async get(login, password, id) {
+    const findParams = id ? { _id: id } : { login, password };
+
     return new Promise((resolve, reject) => {
-      db.insert({ login, password }, (err, newDoc) => {
+      db.findOne(findParams, (err, user) => {
         if (err) {
           reject(err);
         }
 
-        this.id = newDoc._id;
-        resolve(newDoc._id);
+        if (!user) {
+          resolve();
+          return;
+        }
+
+        resolve(user);
       });
     });
   }
